@@ -1,16 +1,18 @@
 <?php
 require_once __DIR__.'/router.php';
+require_once "routes/auth.php";
+require_once "routes/crud.php";
 
 get('/', 'index.html');
 
-get('/api/cards/$user', 'routes/cards');
-post('/api/post', 'routes/post');
-delete('/api/deleteCard', 'routes/delete');
+get('/api/cards/$user', $getCards);
+post('/api/post', $newCard);
+delete('/api/deleteCard', $deleteCard);
 
-post('/api/login', 'routes/login');
-post('/api/signUp', 'routes/signUp');
-post('/api/logout', 'routes/logout');
-post('/api/checkUser', 'routes/checkUser');
+post('/api/login', $login);
+post('/api/signUp', $signUp);
+post('/api/logout', $logout);
+post('/api/checkUser', $checkUser);
 
 any('/404', 'routes/404');
 

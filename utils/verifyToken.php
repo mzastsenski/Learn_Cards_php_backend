@@ -1,6 +1,6 @@
 <?php
-include 'utils/vendor/autoload.php';
-include 'utils/vendor/DevCoder.php';
+require_once 'utils/vendor/autoload.php';
+require_once 'utils/vendor/DevCoder.php';
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
 use DevCoder\DotEnv;
