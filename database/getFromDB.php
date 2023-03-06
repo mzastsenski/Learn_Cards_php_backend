@@ -1,6 +1,6 @@
 <?php
 function getFromDB($sql) {
-  require_once "database/db.php";
+  include "database/db.php";
   try {
     $conn = new PDO("pgsql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
     $stmt = $conn->prepare($sql);

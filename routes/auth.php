@@ -1,5 +1,6 @@
 <?php
 require_once 'database/getFromDB.php';
+require_once 'database/postToDB.php';
 require_once 'utils/bcrypt.php';
 require_once 'utils/newToken.php';
 require_once 'utils/verifyToken.php';
@@ -22,15 +23,13 @@ $login = function() {
 $signUp = function() {  
   $data = json_decode(file_get_contents("php://input"));
   $sql = "SELECT * FROM users_cards WHERE name='$data->user'";
-  
   $result = getFromDB($sql);
-  if (!count($result)) echo '401';
+  if (count($result)) echo '401';
   else {
     $bcrypt = new Bcrypt();
-    $hash = $result[0]["password"];
-    $compare = $bcrypt->verify($data->pass, $hash);
-    if ($compare) newToken($result[0]["name"]);
-    else echo '401';
+    $hash = $bcrypt->hash($data->pass);
+    $sql = "INSERT INTO users_cards (name, password) VALUES ('$data->user','$hash')";
+    postToDB($sql);
   }
 };
 
